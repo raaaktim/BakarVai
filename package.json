@@ -1,0 +1,19 @@
+{
+  "name": "bakar-vai-portfolio",
+  "version": "1.0.0",
+  "description": "Mobile-first lifestyle portfolio website with colored neumorphism and Iron Man 1 intro",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "bakar-vai",
+    "lifestyle",
+    "neumorphism",
+    "ironman",
+    "portfolio",
+    "mobile-first"
+  ],
+  "author": "Antigravity",
+  "license": "ISC"
+}

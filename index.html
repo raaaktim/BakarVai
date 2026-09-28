@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#050811">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>BAKAR VAI — Stark Industries & JARVIS Experience</title>
+
+  <!-- JARVIS Holographic Styles -->
+  <link rel="stylesheet" href="css/jarvis-theme.css">
+  <link rel="stylesheet" href="css/arc-reactor.css">
+  <link rel="stylesheet" href="css/hologram-vision.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Ambient CRT Scanlines -->
+  <div class="jarvis-scanlines"></div>
+
+  <!-- Desktop Presentation Toggle -->
+  <button id="view-mode-btn" class="view-mode-toggle" title="Toggle Desktop View">
+    🖥️ Wide View
+  </button>
+
+  <!-- Minimalist Top HUD Audio Toggle (Stealth Mode - No Music Bar) -->
+  <button id="hud-audio-toggle" class="hud-audio-toggle" aria-label="Toggle Soundtrack">
+    <div class="soundwave-bars">
+      <div class="soundwave-bar"></div>
+      <div class="soundwave-bar"></div>
+      <div class="soundwave-bar"></div>
+    </div>
+    <span id="audio-toggle-label">JARVIS AUDIO</span>
+  </button>
+
+  <!-- ====================================================================
+       STANDBY SCREEN & ARC REACTOR "ACTIVATE" IGNITION
+       ==================================================================== -->
+  <div id="standby-screen" class="standby-screen">
+    <div class="standby-grid"></div>
+
+    <!-- The Arc Reactor Core -->
+    <div class="arc-reactor-wrapper">
+      <div class="arc-outer-chassis"></div>
+      <div class="arc-ticks-ring"></div>
+      
+      <!-- 10 Inductor Copper Coils -->
+      <div class="arc-coils-container">
+        <div class="arc-coil" style="transform: rotate(0deg) translateY(-98px);"></div>
+        <div class="arc-coil" style="transform: rotate(36deg) translateY(-98px);"></div>
+        <div class="arc-coil" style="transform: rotate(72deg) translateY(-98px);"></div>
+        <div class="arc-coil" style="transform: rotate(108deg) translateY(-98px);"></div>
+        <div class="arc-coil" style="transform: rotate(144deg) translateY(-98px);"></div>
+        <div class="arc-coil" style="transform: rotate(180deg) translateY(-98px);"></div>
+        <div class="arc-coil" style="transform: rotate(216deg) translateY(-98px);"></div>
+        <div class="arc-coil" style="transform: rotate(252deg) translateY(-98px);"></div>
+        <div class="arc-coil" style="transform: rotate(288deg) translateY(-98px);"></div>
+        <div class="arc-coil" style="transform: rotate(324deg) translateY(-98px);"></div>
+      </div>
+
+      <div class="arc-inner-ring"></div>
+      <div class="arc-core-chamber"></div>
+
+      <!-- The Primary ACTIVATE Button -->
+      <button id="btn-activate-core" class="btn-activate-core" type="button">
+        <span>ACTIVATE</span>
+      </button>
+    </div>
+
+    <!-- Standby Telemetry Diagnostics -->
+    <div class="standby-telemetry">
+      <div class="standby-title">STARK INDUSTRIES • MARK VII PROTOCOL</div>
+      <div id="standby-status-text" class="standby-status">
+        <span class="arc-dot"></span> PALLADIUM CORE • TAP TO ACTIVATE
+      </div>
+      <div id="arc-charge-gauge" class="arc-charge-gauge">
+        <div id="arc-charge-bar" class="arc-charge-bar"></div>
+      </div>
+    </div>
+
+    <!-- Synchronized Bakar_06 Reveal & Jericho Detonation Stage -->
+    <div id="activation-stage" class="activation-stage">
+      <div class="activation-iris">
+        <img id="bakar-activation-img" class="bakar-activation-img" src="Pic/bakar_06.png" alt="Bakar Vai - Jericho Detonation">
+      </div>
+      <div class="activation-hud-reticle"></div>
+      <div class="activation-shockwave"></div>
+    </div>
+
+    <!-- Overload Flash Layer -->
+    <div id="arc-flash-overlay" class="arc-flash-overlay"></div>
+  </div>
+
+  <!-- ====================================================================
+       MAIN APPLICATION (UNLOCKED POST-ACTIVATION)
+       ==================================================================== -->
+  <div class="app-container">
+
+    <!-- 1. HERO SHOWCASE (BAKAR VAI JERICHO POSTURE) -->
+    <section id="hero" class="hero-section">
+      <div class="hero-bg-media">
+        <img class="hero-img" src="Pic/bakar_06.png" alt="Bakar Vai">
+      </div>
+      <div class="hero-vignette"></div>
+
+      <div class="hero-content">
+        <div class="hero-subtitle">JARVIS PROTOCOL • LIFESTYLE ICON</div>
+        <h1 class="hero-title">BAKAR VAI</h1>
+        <p class="hero-quote">
+          "They say the best weapon is the one you never have to fire. I prefer the weapon you only have to fire once."
+        </p>
+        
+        <button id="btn-redetonate" class="btn-redetonate" type="button">
+          RE-DETONATE CORE 💥
+        </button>
+      </div>
+    </section>
+
+    <!-- 2. ANIMATED HOLOGRAPHIC VISIONS -->
+    <section id="visions" class="section">
+      <div class="section-header">
+        <div class="section-tag">
+          <span class="arc-dot"></span> ARCHIVES
+        </div>
+        <h2 class="section-title">Hologram Visions</h2>
+        <p class="section-desc">
+          Interactive telemetry scans across 6 dimensions of Bakar Vai. Swipe or tilt to inspect biometric readouts.
+        </p>
+      </div>
+
+      <!-- Touch Swipeable Visions Carousel -->
+      <div id="visions-carousel" class="visions-carousel">
+
+        <!-- VISION 06: The Visionary -->
+        <div class="vision-slide" data-track="6">
+          <div class="vision-card">
+            <img class="vision-img" src="Pic/bakar_06.png" alt="The Visionary" loading="lazy">
+            <div class="vision-hologram-grid"></div>
+            <div class="vision-laser-scan"></div>
+            
+            <div class="vision-hud-layer">
+              <div class="vision-corner-tl"></div>
+              <div class="vision-corner-tr"></div>
+              <div class="vision-corner-bl"></div>
+              <div class="vision-corner-br"></div>
+
+              <div class="vision-biometric-tag">
+                <span class="arc-dot"></span> TARGET: BAKAR VAI [100%]
+              </div>
+
+              <div class="vision-lock-reticle"></div>
+
+              <div class="vision-callout-line">
+                <div class="callout-line-segment"></div>
+                <div class="callout-text-bubble">JERICHO DETONATION</div>
+              </div>
+
+              <div class="vision-bottom-telemetry">
+                <span>ARC_CORE: 3.5 GJ</span>
+                <span class="vision-threat-val">BOSS LEVEL: MAX</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="jarvis-panel vision-info-panel jarvis-panel-gold">
+            <div class="vision-chapter-tag">VISION 06 // SOUNDTRACK 06.MP3</div>
+            <h3 class="vision-title">The Visionary</h3>
+            <div class="vision-sub">Jericho Swagger & Absolute Ambition</div>
+            <p class="vision-desc">
+              Three-piece tailored suit, aviators locked, arms wide open to the horizon. When Bakar Vai commands the desert blast, greatness is detonated.
+            </p>
+          </div>
+        </div>
+
+        <!-- VISION 01: The Summit Conqueror -->
+        <div class="vision-slide" data-track="1">
+          <div class="vision-card">
+            <img class="vision-img" src="Pic/bakar_01.png" alt="The Summit Conqueror" loading="lazy">
+            <div class="vision-hologram-grid"></div>
+            <div class="vision-laser-scan"></div>
+            
+            <div class="vision-hud-layer">
+              <div class="vision-corner-tl"></div>
+              <div class="vision-corner-tr"></div>
+              <div class="vision-corner-bl"></div>
+              <div class="vision-corner-br"></div>
+
+              <div class="vision-biometric-tag">
+                <span class="arc-dot"></span> ALTITUDE: +1420M
+              </div>
+
+              <div class="vision-lock-reticle"></div>
+
+              <div class="vision-callout-line">
+                <div class="callout-line-segment"></div>
+                <div class="callout-text-bubble">SUMMIT PERSPECTIVE</div>
+              </div>
+
+              <div class="vision-bottom-telemetry">
+                <span>PULSE: 68 BPM</span>
+                <span class="vision-threat-val">VIBE: SERENE</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="jarvis-panel vision-info-panel">
+            <div class="vision-chapter-tag">VISION 01 // SOUNDTRACK 01.MP3</div>
+            <h3 class="vision-title">The Summit Conqueror</h3>
+            <div class="vision-sub">Mountain Heights & Deep Solitude</div>
+            <p class="vision-desc">
+              Climbing past the cloudline, bamboo hiking staff grounded. Gazing over endless hills, finding clarity and vision above the world.
+            </p>
+          </div>
+        </div>
+
+        <!-- VISION 02: The Turf Maestro -->
+        <div class="vision-slide" data-track="2">
+          <div class="vision-card">
+            <img class="vision-img" src="Pic/bakar_02.png" alt="The Turf Maestro" loading="lazy">
+            <div class="vision-hologram-grid"></div>
+            <div class="vision-laser-scan"></div>
+            
+            <div class="vision-hud-layer">
+              <div class="vision-corner-tl"></div>
+              <div class="vision-corner-tr"></div>
+              <div class="vision-corner-bl"></div>
+              <div class="vision-corner-br"></div>
+
+              <div class="vision-biometric-tag">
+                <span class="arc-dot"></span> AGILITY: 99.4%
+              </div>
+
+              <div class="vision-lock-reticle"></div>
+
+              <div class="vision-callout-line">
+                <div class="callout-line-segment"></div>
+                <div class="callout-text-bubble">MATCH BALL LOCKED</div>
+              </div>
+
+              <div class="vision-bottom-telemetry">
+                <span>STAMINA: 100%</span>
+                <span class="vision-threat-val">ROLE: PLAYMAKER</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="jarvis-panel vision-info-panel">
+            <div class="vision-chapter-tag">VISION 02 // SOUNDTRACK 02.MP3</div>
+            <h3 class="vision-title">The Turf Maestro</h3>
+            <div class="vision-sub">Floodlights & Athletic Passion</div>
+            <p class="vision-desc">
+              Under stadium floodlights, cleats on turf, match ball in hand. Speed, tactical teamwork, and unstoppable athletic hunger.
+            </p>
+          </div>
+        </div>
+
+        <!-- VISION 03: The Coastal Bohemian -->
+        <div class="vision-slide" data-track="3">
+          <div class="vision-card">
+            <img class="vision-img" src="Pic/bakar_03.png" alt="The Coastal Bohemian" loading="lazy">
+            <div class="vision-hologram-grid"></div>
+            <div class="vision-laser-scan"></div>
+            
+            <div class="vision-hud-layer">
+              <div class="vision-corner-tl"></div>
+              <div class="vision-corner-tr"></div>
+              <div class="vision-corner-bl"></div>
+              <div class="vision-corner-br"></div>
+
+              <div class="vision-biometric-tag">
+                <span class="arc-dot"></span> TEMPERATURE: 29°C
+              </div>
+
+              <div class="vision-lock-reticle"></div>
+
+              <div class="vision-callout-line">
+                <div class="callout-line-segment"></div>
+                <div class="callout-text-bubble">BEACH GROVE</div>
+              </div>
+
+              <div class="vision-bottom-telemetry">
+                <span>WIND: 14 KTS</span>
+                <span class="vision-threat-val">MOOD: UNBURDENED</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="jarvis-panel vision-info-panel">
+            <div class="vision-chapter-tag">VISION 03 // SOUNDTRACK 03.MP3</div>
+            <h3 class="vision-title">The Coastal Bohemian</h3>
+            <div class="vision-sub">Ocean Breeze & Sunlit Palms</div>
+            <p class="vision-desc">
+              Keffiyeh wrap, shades reflecting the sun, walking freely where pine groves touch the sand. Finding happiness in genuine laughter.
+            </p>
+          </div>
+        </div>
+
+        <!-- VISION 04: The Riverfarer -->
+        <div class="vision-slide" data-track="4">
+          <div class="vision-card">
+            <img class="vision-img" src="Pic/bakar_04.png" alt="The Riverfarer" loading="lazy">
+            <div class="vision-hologram-grid"></div>
+            <div class="vision-laser-scan"></div>
+            
+            <div class="vision-hud-layer">
+              <div class="vision-corner-tl"></div>
+              <div class="vision-corner-tr"></div>
+              <div class="vision-corner-bl"></div>
+              <div class="vision-corner-br"></div>
+
+              <div class="vision-biometric-tag">
+                <span class="arc-dot"></span> WATERWAY: OPEN
+              </div>
+
+              <div class="vision-lock-reticle"></div>
+
+              <div class="vision-callout-line">
+                <div class="callout-line-segment"></div>
+                <div class="callout-text-bubble">VOYAGE TRAJECTORY</div>
+              </div>
+
+              <div class="vision-bottom-telemetry">
+                <span>DEPTH: 32M</span>
+                <span class="vision-threat-val">FOCUS: CALCULATED</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="jarvis-panel vision-info-panel">
+            <div class="vision-chapter-tag">VISION 04 // SOUNDTRACK 04.MP3</div>
+            <h3 class="vision-title">The Riverfarer</h3>
+            <div class="vision-sub">Endless Waters & Strategic Calm</div>
+            <p class="vision-desc">
+              Leaning on the riverboat railing across expansive waters. Silent reflections under the blue sky, calculating the next horizon.
+            </p>
+          </div>
+        </div>
+
+        <!-- VISION 05: The Daily Hustler -->
+        <div class="vision-slide" data-track="5">
+          <div class="vision-card">
+            <img class="vision-img" src="Pic/bakar_05.png" alt="The Daily Hustler" loading="lazy">
+            <div class="vision-hologram-grid"></div>
+            <div class="vision-laser-scan"></div>
+            
+            <div class="vision-hud-layer">
+              <div class="vision-corner-tl"></div>
+              <div class="vision-corner-tr"></div>
+              <div class="vision-corner-bl"></div>
+              <div class="vision-corner-br"></div>
+
+              <div class="vision-biometric-tag">
+                <span class="arc-dot"></span> ENGINE: IDLE READY
+              </div>
+
+              <div class="vision-lock-reticle"></div>
+
+              <div class="vision-callout-line">
+                <div class="callout-line-segment"></div>
+                <div class="callout-text-bubble">HUSTLE EVERYDAY</div>
+              </div>
+
+              <div class="vision-bottom-telemetry">
+                <span>ODOMETER: +500KM</span>
+                <span class="vision-threat-val">DRIVE: UNSTOPPABLE</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="jarvis-panel vision-info-panel">
+            <div class="vision-chapter-tag">VISION 05 // SOUNDTRACK 05.MP3</div>
+            <h3 class="vision-title">The Daily Hustler</h3>
+            <div class="vision-sub">Road Trips & Non-Stop Drive</div>
+            <p class="vision-desc">
+              Crimson hoodie, scarf wrapped, victory sign raised in front of the road machine. The creed is woven on the chest: Hustle Everyday.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Carousel Pagination Dots -->
+      <div id="carousel-dots" class="carousel-dots"></div>
+    </section>
+
+    <!-- 3. MARK-VII ARMOR MATRIX (TELEMETRY DIALS) -->
+    <section id="matrix" class="section">
+      <div class="section-header">
+        <div class="section-tag">
+          <span class="arc-dot"></span> BIOMETRICS
+        </div>
+        <h2 class="section-title">Armor Matrix</h2>
+        <p class="section-desc">
+          Live tactical attributes streamed from Bakar Vai's daily expeditions.
+        </p>
+      </div>
+
+      <div class="matrix-grid">
+        <!-- Charisma -->
+        <div class="jarvis-panel matrix-card jarvis-panel-gold">
+          <div class="matrix-dial" data-pct="100">
+            <svg class="matrix-dial-svg" viewBox="0 0 74 74">
+              <circle class="matrix-circle-bg" cx="37" cy="37" r="32"></circle>
+              <circle class="matrix-circle-val" cx="37" cy="37" r="32" stroke="var(--stark-gold)"></circle>
+            </svg>
+            <span class="matrix-val-num">100%</span>
+          </div>
+          <div>
+            <div class="matrix-label">Charisma Index</div>
+            <div class="matrix-sub">Stark Aura</div>
+          </div>
+        </div>
+
+        <!-- Hustle -->
+        <div class="jarvis-panel matrix-card">
+          <div class="matrix-dial" data-pct="99">
+            <svg class="matrix-dial-svg" viewBox="0 0 74 74">
+              <circle class="matrix-circle-bg" cx="37" cy="37" r="32"></circle>
+              <circle class="matrix-circle-val" cx="37" cy="37" r="32" stroke="var(--stark-red)"></circle>
+            </svg>
+            <span class="matrix-val-num">99%</span>
+          </div>
+          <div>
+            <div class="matrix-label">Hustle Output</div>
+            <div class="matrix-sub">Daily Engine</div>
+          </div>
+        </div>
+
+        <!-- Wanderlust -->
+        <div class="jarvis-panel matrix-card">
+          <div class="matrix-dial" data-pct="98">
+            <svg class="matrix-dial-svg" viewBox="0 0 74 74">
+              <circle class="matrix-circle-bg" cx="37" cy="37" r="32"></circle>
+              <circle class="matrix-circle-val" cx="37" cy="37" r="32" stroke="var(--arc-cyan)"></circle>
+            </svg>
+            <span class="matrix-val-num">98%</span>
+          </div>
+          <div>
+            <div class="matrix-label">Wanderlust</div>
+            <div class="matrix-sub">Expedition Radar</div>
+          </div>
+        </div>
+
+        <!-- Turf Agility -->
+        <div class="jarvis-panel matrix-card">
+          <div class="matrix-dial" data-pct="95">
+            <svg class="matrix-dial-svg" viewBox="0 0 74 74">
+              <circle class="matrix-circle-bg" cx="37" cy="37" r="32"></circle>
+              <circle class="matrix-circle-val" cx="37" cy="37" r="32" stroke="#2ed573"></circle>
+            </svg>
+            <span class="matrix-val-num">95%</span>
+          </div>
+          <div>
+            <div class="matrix-label">Turf Agility</div>
+            <div class="matrix-sub">Ball Control</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. THE STARK DOCTRINE -->
+    <section id="doctrine" class="section">
+      <div class="section-header">
+        <div class="section-tag">
+          <span class="arc-dot"></span> PHILOSOPHY
+        </div>
+        <h2 class="section-title">The Stark Code</h2>
+        <p class="section-desc">
+          Core principles governing Bakar Vai's mindset and vision.
+        </p>
+      </div>
+
+      <div class="doctrine-list">
+        <div class="jarvis-panel doctrine-item">
+          <p class="doctrine-text">
+            "Why settle for a spark when you have the capacity to detonate a Jericho shockwave? Aim grand, or don't take the shot."
+          </p>
+          <div class="doctrine-author">— Bakar Vai, The Jericho Principle</div>
+        </div>
+
+        <div class="jarvis-panel doctrine-item" style="border-left-color: var(--arc-cyan);">
+          <p class="doctrine-text">
+            "Under the stadium floodlights, talk is cheap. Pass, move, hustle, and write history on the turf."
+          </p>
+          <div class="doctrine-author">— Bakar Vai, Pitch Philosophy</div>
+        </div>
+
+        <div class="jarvis-panel doctrine-item" style="border-left-color: var(--stark-red);">
+          <p class="doctrine-text">
+            "Mountains bow to those who respect the climb. Step by deliberate step, the summit is inevitable."
+          </p>
+          <div class="doctrine-author">— Bakar Vai, Summit Doctrine</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. TACTICAL LOADOUT -->
+    <section id="arsenal" class="section">
+      <div class="section-header">
+        <div class="section-tag">
+          <span class="arc-dot"></span> LOADOUT
+        </div>
+        <h2 class="section-title">Tactical Arsenal</h2>
+        <p class="section-desc">
+          Essential gear backing every adventure.
+        </p>
+      </div>
+
+      <div class="arsenal-grid">
+        <div class="jarvis-panel arsenal-item">
+          <div class="arsenal-icon">🕶️</div>
+          <div class="arsenal-title">Stark Shades</div>
+          <div class="arsenal-desc">Eyewear</div>
+        </div>
+
+        <div class="jarvis-panel arsenal-item">
+          <div class="arsenal-icon">⚽</div>
+          <div class="arsenal-title">Match Ball</div>
+          <div class="arsenal-desc">Athletics</div>
+        </div>
+
+        <div class="jarvis-panel arsenal-item">
+          <div class="arsenal-icon">👔</div>
+          <div class="arsenal-title">Jericho Fit</div>
+          <div class="arsenal-desc">Suit</div>
+        </div>
+
+        <div class="jarvis-panel arsenal-item">
+          <div class="arsenal-icon">🎋</div>
+          <div class="arsenal-title">Trek Staff</div>
+          <div class="arsenal-desc">Summit</div>
+        </div>
+
+        <div class="jarvis-panel arsenal-item">
+          <div class="arsenal-icon">🚐</div>
+          <div class="arsenal-title">Road Machine</div>
+          <div class="arsenal-desc">Expedition</div>
+        </div>
+
+        <div class="jarvis-panel arsenal-item">
+          <div class="arsenal-icon">⚡</div>
+          <div class="arsenal-title">Arc Core Will</div>
+          <div class="arsenal-desc">Power</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. COMM-LINK TRANSMISSION -->
+    <section id="comm" class="section">
+      <div class="section-header">
+        <div class="section-tag">
+          <span class="arc-dot"></span> COMM-CHANNELS
+        </div>
+        <h2 class="section-title">Connect with Bakar Vai</h2>
+        <p class="section-desc">
+          Official verified Stark transmission channels for Bakar Vai.
+        </p>
+      </div>
+
+      <div class="jarvis-panel jarvis-panel-gold">
+        <div class="comm-grid-two">
+          <!-- Instagram -->
+          <a class="comm-channel-card" href="https://www.instagram.com/abubakarsiddique_siddique/" target="_blank" rel="noopener">
+            <div class="comm-channel-icon" style="color: #e1306c;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="2" width="20" height="20" rx="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </div>
+            <div class="comm-channel-info">
+              <div class="comm-channel-title">INSTAGRAM</div>
+              <div class="comm-channel-handle">@abubakarsiddique_siddique</div>
+            </div>
+            <div class="comm-channel-arrow">↗</div>
+          </a>
+
+          <!-- Facebook -->
+          <a class="comm-channel-card" href="https://www.facebook.com/abubakarsiddique.siddique.129794" target="_blank" rel="noopener">
+            <div class="comm-channel-icon" style="color: #1877f2;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+              </svg>
+            </div>
+            <div class="comm-channel-info">
+              <div class="comm-channel-title">FACEBOOK</div>
+              <div class="comm-channel-handle">abubakarsiddique.siddique</div>
+            </div>
+            <div class="comm-channel-arrow">↗</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 20px 10px 10px; font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-muted); letter-spacing: 1.5px;">
+      <p>STARK INDUSTRIES • BAKAR VAI PROTOCOL • VERCEL READY</p>
+      <p style="margin-top: 4px; opacity: 0.6;">JARVIS ARCHITECTURE // MARK VII</p>
+    </footer>
+
+  </div>
+
+  <!-- ====================================================================
+       JARVIS HOLOGRAPHIC BOTTOM NAVIGATION DOCK
+       ==================================================================== -->
+  <div class="jarvis-dock-wrap">
+    <nav class="jarvis-dock" aria-label="Quick Navigation">
+      <a class="dock-btn active" href="#hero">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polygon points="12 8 8 12 12 16 16 12 12 8"></polygon>
+        </svg>
+        <span>Hero</span>
+      </a>
+
+      <a class="dock-btn" href="#visions">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+          <circle cx="8.5" cy="8.5" r="1.5"></circle>
+          <polyline points="21 15 16 10 5 21"></polyline>
+        </svg>
+        <span>Visions</span>
+      </a>
+
+      <a class="dock-btn" href="#matrix">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="20" x2="18" y2="10"></line>
+          <line x1="12" y1="20" x2="12" y2="4"></line>
+          <line x1="6" y1="20" x2="6" y2="14"></line>
+        </svg>
+        <span>Matrix</span>
+      </a>
+
+      <a class="dock-btn" href="#doctrine">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+        <span>Code</span>
+      </a>
+
+      <a class="dock-btn" href="#comm">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+          <polyline points="22,6 12,13 2,6"></polyline>
+        </svg>
+        <span>Comm</span>
+      </a>
+    </nav>
+  </div>
+
+  <!-- JARVIS Core Script -->
+  <script src="js/jarvis-engine.js"></script>
+</body>
+</html>

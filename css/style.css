@@ -1,0 +1,573 @@
+/* ==========================================================================
+   BAKAR VAI - JARVIS MOBILE-FIRST LAYOUT & COMPONENT STYLING
+   Phone-first ergonomics, touch carousel, Stark armor matrix & bottom dock
+   ========================================================================== */
+
+/* Main Mobile-First Shell */
+.app-container {
+  width: 100%;
+  max-width: 480px;
+  min-height: 100vh;
+  min-height: 100svh;
+  margin: 0 auto;
+  position: relative;
+  background: var(--bg-dark);
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.95);
+  padding-bottom: 90px; /* space for bottom HUD dock */
+  transition: max-width 0.4s ease;
+}
+
+/* Desktop Frame View */
+@media (min-width: 768px) {
+  body {
+    padding: 24px 0;
+  }
+  .app-container {
+    border-radius: 36px;
+    border: 2px solid rgba(0, 242, 254, 0.3);
+    box-shadow: 
+      0 20px 60px rgba(0, 0, 0, 0.95),
+      0 0 35px rgba(0, 242, 254, 0.15);
+  }
+}
+
+/* Desktop Wide Mode Option */
+body.wide-mode .app-container {
+  max-width: 1000px;
+  border-radius: 0;
+  border: none;
+}
+
+.view-mode-toggle {
+  display: none;
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 1000;
+  background: rgba(6, 12, 24, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 242, 254, 0.3);
+  color: var(--arc-cyan);
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+@media (min-width: 768px) {
+  .view-mode-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+}
+
+/* ==========================================================================
+   SECTION COMMON STYLES
+   ========================================================================== */
+.section {
+  padding: 34px 18px;
+  position: relative;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.section-tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--arc-cyan);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.section-title {
+  font-size: 1.7rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: #fff;
+  text-transform: uppercase;
+  margin: 0 0 6px;
+  text-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
+}
+
+.section-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   HERO / JERICHO POST-ACTIVATION SHOWCASE
+   ========================================================================== */
+.hero-section {
+  position: relative;
+  width: 100%;
+  min-height: 85svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px 18px 36px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.hero-bg-media {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  filter: contrast(1.15) saturate(1.2);
+}
+
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: 
+    radial-gradient(circle at 50% 35%, transparent 20%, rgba(5, 8, 17, 0.6) 70%, #050811 98%),
+    linear-gradient(180deg, rgba(5, 8, 17, 0.4) 0%, transparent 45%, rgba(5, 8, 17, 0.95) 88%, #050811 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  color: var(--stark-gold);
+  text-shadow: 0 0 10px var(--stark-gold-glow);
+}
+
+.hero-title {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.05;
+  letter-spacing: 1px;
+  text-shadow: 
+    0 0 30px var(--arc-cyan-glow),
+    2px 2px 4px rgba(0, 0, 0, 0.9);
+  margin: 0;
+}
+
+.hero-quote {
+  font-size: 0.88rem;
+  color: #cbd5e1;
+  max-width: 330px;
+  line-height: 1.45;
+  font-style: italic;
+}
+
+.btn-redetonate {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--stark-gold), var(--stark-red));
+  border: 1px solid #fff;
+  border-radius: var(--radius-pill);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 14px 26px;
+  cursor: pointer;
+  box-shadow: 
+    0 0 30px var(--stark-gold-glow),
+    0 4px 15px rgba(0, 0, 0, 0.6);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-redetonate:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 0 45px var(--stark-gold);
+}
+
+.btn-redetonate:active {
+  transform: scale(0.96);
+}
+
+/* ==========================================================================
+   TOUCH CAROUSEL FOR ANIMATED VISIONS
+   ========================================================================== */
+.visions-carousel {
+  width: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  gap: 16px;
+  padding: 10px 4px 20px;
+  scrollbar-width: none;
+}
+
+.visions-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.vision-slide {
+  flex: 0 0 88%;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.vision-info-panel {
+  padding: 16px;
+}
+
+.vision-chapter-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--arc-cyan);
+}
+
+.vision-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 4px 0 2px;
+}
+
+.vision-sub {
+  font-size: 0.8rem;
+  color: var(--stark-gold);
+  font-family: var(--font-mono);
+  margin-bottom: 8px;
+}
+
+.vision-desc {
+  font-size: 0.84rem;
+  color: #94a3b8;
+  line-height: 1.45;
+}
+
+/* Carousel Indicators */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.c-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(0, 242, 254, 0.2);
+  border: 1px solid rgba(0, 242, 254, 0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.c-dot.active {
+  width: 24px;
+  border-radius: 4px;
+  background: var(--arc-cyan);
+  box-shadow: 0 0 10px var(--arc-cyan-glow);
+}
+
+/* ==========================================================================
+   STARK ARMOR MATRIX (TELEMETRY DIALS)
+   ========================================================================== */
+.matrix-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.matrix-card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 12px;
+}
+
+.matrix-dial {
+  position: relative;
+  width: 74px;
+  height: 74px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.matrix-dial-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.matrix-circle-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 6;
+}
+
+.matrix-circle-val {
+  fill: none;
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 201;
+  stroke-dashoffset: 201;
+  transition: stroke-dashoffset 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.matrix-val-num {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #fff;
+  z-index: 2;
+}
+
+.matrix-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #f1f5f9;
+}
+
+.matrix-sub {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   STARK DOCTRINE / RULES
+   ========================================================================== */
+.doctrine-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.doctrine-item {
+  border-left: 3px solid var(--stark-gold);
+  padding: 16px;
+}
+
+.doctrine-text {
+  font-size: 0.92rem;
+  font-style: italic;
+  color: #e2e8f0;
+  line-height: 1.45;
+  margin-bottom: 6px;
+}
+
+.doctrine-author {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--stark-gold);
+  letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   TACTICAL ARSENAL
+   ========================================================================== */
+.arsenal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.arsenal-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  padding: 14px 6px;
+}
+
+.arsenal-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 242, 254, 0.08);
+  border: 1px solid var(--arc-cyan);
+  color: var(--arc-cyan);
+  box-shadow: 0 0 12px var(--arc-cyan-subtle);
+}
+
+.arsenal-title {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #f1f5f9;
+}
+
+.arsenal-desc {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   COMM-LINK TRANSMISSION (VERIFIED SOCIAL CHANNELS)
+   ========================================================================== */
+.comm-grid-two {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.comm-channel-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  background: rgba(8, 14, 28, 0.7);
+  border: 1px solid rgba(0, 242, 254, 0.25);
+  border-radius: var(--radius-cut);
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.comm-channel-card:hover {
+  background: rgba(14, 24, 48, 0.85);
+  border-color: var(--arc-cyan);
+  box-shadow: 0 0 20px var(--arc-cyan-glow);
+  transform: translateY(-2px);
+}
+
+.comm-channel-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  flex-shrink: 0;
+}
+
+.comm-channel-info {
+  flex: 1;
+}
+
+.comm-channel-title {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #ffffff;
+}
+
+.comm-channel-handle {
+  font-size: 0.76rem;
+  color: var(--arc-cyan);
+  word-break: break-all;
+}
+
+.comm-channel-arrow {
+  font-size: 1.2rem;
+  color: var(--arc-cyan);
+  transition: transform 0.2s ease;
+}
+
+.comm-channel-card:hover .comm-channel-arrow {
+  transform: translate(3px, -3px);
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   JARVIS HOLOGRAPHIC BOTTOM NAVIGATION DOCK
+   ========================================================================== */
+.jarvis-dock-wrap {
+  position: fixed;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 24px);
+  max-width: 440px;
+  z-index: 998;
+}
+
+.jarvis-dock {
+  background: rgba(6, 12, 24, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 242, 254, 0.35);
+  box-shadow: 
+    0 12px 35px rgba(0, 0, 0, 0.85),
+    0 0 20px var(--arc-cyan-subtle);
+  border-radius: var(--radius-pill);
+  padding: 6px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dock-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 14px;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+}
+
+.dock-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.dock-btn:hover {
+  color: var(--text-primary);
+}
+
+.dock-btn.active {
+  color: var(--arc-cyan);
+  background: rgba(0, 242, 254, 0.1);
+}
+
+.dock-btn.active svg {
+  filter: drop-shadow(0 0 6px var(--arc-cyan-glow));
+}

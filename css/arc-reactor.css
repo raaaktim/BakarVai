@@ -1,0 +1,391 @@
+/* ==========================================================================
+   ARC REACTOR 5-SECOND IGNITION & MISSILE BLAST SEQUENCE
+   ========================================================================== */
+
+/* Fullscreen Standby Screen */
+.standby-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: radial-gradient(circle at 50% 50%, #0d1629 0%, #050811 75%, #020307 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s ease;
+}
+
+.standby-screen.dissolved {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Background Ambient Grid */
+.standby-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle, rgba(0, 242, 254, 0.15) 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   THE ARC REACTOR CORE
+   ========================================================================== */
+.arc-reactor-wrapper {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Titanium Outer Chassis */
+.arc-outer-chassis {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 4px solid #1e293b;
+  box-shadow: 
+    0 0 50px rgba(0, 242, 254, 0.25),
+    inset 0 0 30px rgba(0, 0, 0, 0.9);
+  background: radial-gradient(circle, rgba(15, 23, 42, 0.8) 0%, #080c18 100%);
+  transition: box-shadow 1s ease;
+}
+
+.standby-screen.charging .arc-outer-chassis {
+  box-shadow: 
+    0 0 80px var(--arc-cyan-glow),
+    0 0 120px rgba(0, 242, 254, 0.3),
+    inset 0 0 40px rgba(0, 242, 254, 0.2);
+}
+
+/* Rotating Tick Ring */
+.arc-ticks-ring {
+  position: absolute;
+  inset: 10px;
+  border-radius: 50%;
+  border: 1px dashed rgba(0, 242, 254, 0.4);
+  animation: arcRotateCw 24s linear infinite;
+}
+
+.standby-screen.charging .arc-ticks-ring {
+  animation: arcRotateCw 2s linear infinite;
+  border-color: var(--arc-cyan);
+}
+
+/* 10 Inductor Copper Coils */
+.arc-coils-container {
+  position: absolute;
+  inset: 22px;
+  border-radius: 50%;
+}
+
+.arc-coil {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 24px;
+  margin-top: -12px;
+  margin-left: -7px;
+  background: linear-gradient(180deg, #d35400, #f39c12, #b9770e);
+  border: 1px solid rgba(0, 242, 254, 0.5);
+  box-shadow: 0 0 8px rgba(243, 156, 18, 0.4);
+  border-radius: 3px;
+  transform-origin: center center;
+  transition: all 0.4s ease;
+}
+
+/* Active glowing coil during 5-second power-up */
+.arc-coil.ignited {
+  background: linear-gradient(180deg, #ffffff, var(--arc-cyan), #00c3ff);
+  border-color: #ffffff;
+  box-shadow: 
+    0 0 20px var(--arc-cyan),
+    0 0 35px var(--arc-cyan-glow);
+}
+
+/* Inner Magnetic Containment Ring */
+.arc-inner-ring {
+  position: absolute;
+  inset: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--arc-cyan);
+  box-shadow: 
+    0 0 25px var(--arc-cyan-glow),
+    inset 0 0 20px var(--arc-cyan-glow);
+  animation: arcRotateCcw 14s linear infinite;
+}
+
+.standby-screen.charging .arc-inner-ring {
+  animation: arcRotateCcw 1.2s linear infinite;
+  border-color: #ffffff;
+  box-shadow: 0 0 40px var(--arc-cyan), inset 0 0 30px #ffffff;
+}
+
+/* Central Glowing Palladium Chamber */
+.arc-core-chamber {
+  position: absolute;
+  inset: 72px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff 0%, var(--arc-cyan) 45%, rgba(0, 242, 254, 0.2) 75%, transparent 100%);
+  box-shadow: 
+    0 0 45px var(--arc-cyan),
+    0 0 80px var(--arc-cyan-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: coreBreathe 3s ease-in-out infinite alternate;
+  transition: all 0.5s ease;
+}
+
+.standby-screen.charging .arc-core-chamber {
+  background: radial-gradient(circle, #ffffff 30%, var(--arc-cyan) 70%, var(--stark-gold) 100%);
+  box-shadow: 
+    0 0 70px #ffffff,
+    0 0 120px var(--arc-cyan);
+  animation: coreSurge 0.15s infinite alternate;
+}
+
+@keyframes coreSurge {
+  0% { transform: scale(1.02); filter: brightness(1.2); }
+  100% { transform: scale(1.1); filter: brightness(1.6); }
+}
+
+@keyframes coreBreathe {
+  0% { transform: scale(0.96); filter: brightness(0.9); }
+  100% { transform: scale(1.04); filter: brightness(1.2); }
+}
+
+@keyframes arcRotateCw {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes arcRotateCcw {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+/* ACTIVATE Button */
+.btn-activate-core {
+  position: relative;
+  z-index: 10;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: rgba(6, 12, 24, 0.88);
+  border: 2px solid var(--arc-cyan);
+  box-shadow: 
+    0 0 25px var(--arc-cyan-glow),
+    inset 0 0 15px var(--arc-cyan-subtle);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: all 0.25s ease;
+  user-select: none;
+}
+
+.btn-activate-core:hover {
+  transform: scale(1.08);
+  border-color: #fff;
+  color: var(--arc-cyan-bright);
+  box-shadow: 
+    0 0 40px var(--arc-cyan),
+    inset 0 0 20px var(--arc-cyan);
+}
+
+.btn-activate-core:active {
+  transform: scale(0.94);
+}
+
+/* 5-Second Charging Progress Bar on Arc Reactor */
+.arc-charge-gauge {
+  display: none;
+  margin-top: 14px;
+  width: 240px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 242, 254, 0.3);
+  box-shadow: 0 0 12px var(--arc-cyan-subtle);
+}
+
+.arc-charge-bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--arc-cyan), var(--stark-gold), #ffffff);
+  box-shadow: 0 0 10px var(--arc-cyan);
+  transition: width 0.1s linear;
+}
+
+/* Standby Telemetry Diagnostics */
+.standby-telemetry {
+  margin-top: 26px;
+  text-align: center;
+  font-family: var(--font-mono);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.standby-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--arc-cyan);
+  text-shadow: 0 0 10px var(--arc-cyan-glow);
+}
+
+.standby-status {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* ==========================================================================
+   MISSILE BLAST ACTIVATION STAGE (BAKAR_06 REVEAL)
+   ========================================================================== */
+.activation-stage {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease;
+}
+
+.activation-stage.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* The Bakar_06 Hero Image Layer (Appears like a missile blast) */
+.activation-iris {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bakar-activation-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  filter: contrast(1.3) saturate(1.3) brightness(1.2);
+  transform: scale(1.4);
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 1.2s cubic-bezier(0.1, 0.9, 0.2, 1), filter 0.8s ease;
+}
+
+/* Missile Blast Ignition State */
+.activation-stage.stage-blast .bakar-activation-img {
+  opacity: 1;
+  transform: scale(1);
+  filter: contrast(1.15) saturate(1.2) brightness(1);
+}
+
+/* JARVIS Target Locking Reticle on Bakar */
+.activation-hud-reticle {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 220px;
+  height: 220px;
+  border: 2px dashed var(--arc-cyan);
+  border-radius: 50%;
+  opacity: 0;
+  box-shadow: 0 0 35px var(--arc-cyan-glow);
+  animation: hudRotateCw 6s linear infinite;
+  transition: opacity 0.2s ease;
+}
+
+.activation-stage.stage-blast .activation-hud-reticle {
+  opacity: 1;
+}
+
+/* Massive Missile Blast Shockwave */
+.activation-shockwave {
+  position: absolute;
+  top: 36%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.05);
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 8px solid var(--stark-gold);
+  box-shadow: 
+    0 0 80px var(--stark-gold-glow),
+    0 0 120px var(--stark-red-glow),
+    inset 0 0 60px #ffffff;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.activation-stage.stage-blast .activation-shockwave {
+  animation: missileBlastWave 1.8s cubic-bezier(0.05, 0.9, 0.2, 1) forwards;
+}
+
+@keyframes missileBlastWave {
+  0% { transform: translate(-50%, -50%) scale(0.05); opacity: 1; }
+  40% { opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(14); opacity: 0; }
+}
+
+/* Full-Screen Camera Shake on Missile Blast */
+.screen-detonate-shake {
+  animation: missileScreenShake 1.1s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes missileScreenShake {
+  10%, 90% { transform: translate3d(-6px, -4px, 0) scale(1.03); }
+  20%, 80% { transform: translate3d(8px, 6px, 0) scale(1.05); }
+  30%, 50%, 70% { transform: translate3d(-10px, -8px, 0) scale(1.04); }
+  40%, 60% { transform: translate3d(9px, 8px, 0) scale(1.03); }
+  100% { transform: translate3d(0, 0, 0) scale(1); }
+}
+
+/* Blinding White Flash Overlay */
+.arc-flash-overlay {
+  position: absolute;
+  inset: 0;
+  background: #ffffff;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.arc-flash-overlay.flash {
+  opacity: 0.95;
+}
+

@@ -1,0 +1,227 @@
+/* ==========================================================================
+   JARVIS HOLOGRAPHIC VISION FOR IMAGES
+   Laser scanline sweeps, biometric HUD leader lines, target reticles & 3D tilt
+   ========================================================================== */
+
+/* Holographic Card Frame */
+.vision-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5.2;
+  border-radius: var(--radius-cut);
+  overflow: hidden;
+  background: #050811;
+  border: 1px solid rgba(0, 242, 254, 0.4);
+  box-shadow: 
+    0 12px 35px rgba(0, 0, 0, 0.8),
+    0 0 25px var(--arc-cyan-subtle);
+  transform-style: preserve-3d;
+  transition: transform 0.25s ease-out, box-shadow 0.3s ease;
+  user-select: none;
+}
+
+.vision-card:hover {
+  border-color: var(--arc-cyan);
+  box-shadow: 
+    0 15px 45px rgba(0, 0, 0, 0.9),
+    0 0 35px var(--arc-cyan-glow);
+}
+
+/* Image Element */
+.vision-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: contrast(1.1) saturate(1.15);
+  transition: transform 0.4s ease, filter 0.3s ease;
+  display: block;
+}
+
+.vision-card:hover .vision-img {
+  transform: scale(1.03);
+}
+
+/* Hologram Grid Mesh on Photo */
+.vision-hologram-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(0, 242, 254, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 242, 254, 0.08) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0.6;
+}
+
+/* Continuous Cyan Laser Scanline Sweep */
+.vision-laser-scan {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, var(--arc-cyan) 50%, transparent 100%);
+  box-shadow: 
+    0 0 15px var(--arc-cyan),
+    0 0 30px var(--arc-cyan-glow);
+  pointer-events: none;
+  z-index: 5;
+  animation: laserScanMove 3.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes laserScanMove {
+  0% { top: 0%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* Biometric HUD Overlay Layer */
+.vision-hud-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 6;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+}
+
+/* Corner Target Brackets */
+.vision-corner-tl {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 16px;
+  height: 16px;
+  border-top: 2px solid var(--arc-cyan);
+  border-left: 2px solid var(--arc-cyan);
+  filter: drop-shadow(0 0 6px var(--arc-cyan-glow));
+}
+.vision-corner-tr {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 16px;
+  height: 16px;
+  border-top: 2px solid var(--arc-cyan);
+  border-right: 2px solid var(--arc-cyan);
+  filter: drop-shadow(0 0 6px var(--arc-cyan-glow));
+}
+.vision-corner-bl {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  width: 16px;
+  height: 16px;
+  border-bottom: 2px solid var(--arc-cyan);
+  border-left: 2px solid var(--arc-cyan);
+  filter: drop-shadow(0 0 6px var(--arc-cyan-glow));
+}
+.vision-corner-br {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 16px;
+  height: 16px;
+  border-bottom: 2px solid var(--arc-cyan);
+  border-right: 2px solid var(--arc-cyan);
+  filter: drop-shadow(0 0 6px var(--arc-cyan-glow));
+}
+
+/* Biometric Facial Recognition Tag */
+.vision-biometric-tag {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(6, 12, 24, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--arc-cyan);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  letter-spacing: 1.2px;
+  color: var(--arc-cyan);
+  box-shadow: 0 0 10px var(--arc-cyan-subtle);
+  animation: tagFlicker 4s infinite ease-in-out;
+}
+
+@keyframes tagFlicker {
+  0%, 100% { opacity: 0.95; }
+  45% { opacity: 0.95; }
+  50% { opacity: 0.4; }
+  55% { opacity: 0.95; }
+}
+
+/* Center HUD Reticle Lock */
+.vision-lock-reticle {
+  position: absolute;
+  top: 36%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90px;
+  height: 90px;
+  border: 1px dashed rgba(0, 242, 254, 0.6);
+  border-radius: 50%;
+  animation: hudRotateCw 16s linear infinite;
+  pointer-events: none;
+}
+
+.vision-lock-reticle::before {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  border: 1.5px solid rgba(245, 175, 25, 0.7);
+  border-radius: 50%;
+  animation: hudRotateCcw 10s linear infinite;
+}
+
+/* Leader Line Callout */
+.vision-callout-line {
+  position: absolute;
+  top: 36%;
+  left: 58%;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.callout-line-segment {
+  width: 45px;
+  height: 1px;
+  background: var(--arc-cyan);
+  box-shadow: 0 0 6px var(--arc-cyan-glow);
+}
+
+.callout-text-bubble {
+  background: rgba(6, 12, 24, 0.9);
+  border: 1px solid var(--arc-cyan);
+  color: #fff;
+  padding: 3px 8px;
+  border-radius: 3px;
+  font-size: 0.6rem;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  box-shadow: 0 0 10px var(--arc-cyan-subtle);
+}
+
+/* Bottom Metric Bar */
+.vision-bottom-telemetry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(180deg, transparent, rgba(5, 8, 17, 0.95));
+  padding-top: 10px;
+  font-size: 0.68rem;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+}
+
+.vision-threat-val {
+  color: var(--stark-gold);
+  font-weight: 700;
+}
